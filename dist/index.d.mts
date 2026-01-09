@@ -1,4 +1,4 @@
-import { ComponentType, ReactNode, MouseEventHandler } from 'react';
+import React, { ComponentType, ReactNode, MouseEventHandler } from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
 interface User {
@@ -44,4 +44,26 @@ declare function UserMenu({ auth, LinkComponent: Link }: UserMenuProps): react_j
 
 declare function ThemeToggle(): react_jsx_runtime.JSX.Element;
 
-export { type AuthState, Footer, Header, type LinkComponentType, type LinkProps, ThemeToggle, type User, UserMenu };
+declare function ThemeProviders({ children }: {
+    children: React.ReactNode;
+}): react_jsx_runtime.JSX.Element;
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: 'primary' | 'secondary' | 'ghost';
+    isLoading?: boolean;
+}
+declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    error?: string;
+    icon?: React.ReactNode;
+}
+declare const Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
+
+interface PasswordInputProps extends Omit<InputProps, 'type' | 'icon'> {
+    label?: string;
+    required?: boolean;
+}
+declare const PasswordInput: React.ForwardRefExoticComponent<PasswordInputProps & React.RefAttributes<HTMLInputElement>>;
+
+export { type AuthState, Button, type ButtonProps, Footer, Header, Input, type InputProps, type LinkComponentType, type LinkProps, PasswordInput, type PasswordInputProps, ThemeProviders, ThemeToggle, type User, UserMenu };

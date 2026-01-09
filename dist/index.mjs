@@ -286,9 +286,124 @@ function Footer({
     ] })
   ] }) });
 }
+
+// src/components/ThemeProviders.tsx
+import { ThemeProvider } from "next-themes";
+import { jsx as jsx5 } from "react/jsx-runtime";
+function ThemeProviders({ children }) {
+  return /* @__PURE__ */ jsx5(ThemeProvider, { attribute: "class", defaultTheme: "system", enableSystem: true, children });
+}
+
+// src/components/Button.tsx
+import React from "react";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+var Button = React.forwardRef(
+  ({ className, variant = "primary", isLoading, children, disabled, ...props }, ref) => {
+    const baseStyles = "inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
+    const variants = {
+      primary: "bg-brand-orange text-white shadow-sm shadow-orange-200 dark:shadow-none hover:shadow-orange-300 dark:hover:shadow-brand-orange/20 hover:-translate-y-0.5 focus:ring-brand-orange dark:focus:ring-offset-neutral-900",
+      secondary: "bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800 shadow-sm hover:shadow-md dark:shadow-none focus:ring-neutral-200 dark:focus:ring-neutral-700 dark:focus:ring-offset-neutral-900",
+      ghost: "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:ring-neutral-200"
+    };
+    return /* @__PURE__ */ jsxs5(
+      "button",
+      {
+        ref,
+        className: cn(baseStyles, variants[variant], className),
+        disabled: disabled || isLoading,
+        ...props,
+        children: [
+          isLoading && /* @__PURE__ */ jsxs5("svg", { className: "w-4 h-4 mr-2 animate-spin", fill: "none", viewBox: "0 0 24 24", children: [
+            /* @__PURE__ */ jsx6("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }),
+            /* @__PURE__ */ jsx6("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" })
+          ] }),
+          children
+        ]
+      }
+    );
+  }
+);
+Button.displayName = "Button";
+
+// src/components/Input.tsx
+import React2 from "react";
+import { jsx as jsx7, jsxs as jsxs6 } from "react/jsx-runtime";
+var Input = React2.forwardRef(
+  ({ className, error, icon, ...props }, ref) => {
+    return /* @__PURE__ */ jsxs6("div", { className: "relative", children: [
+      /* @__PURE__ */ jsx7(
+        "input",
+        {
+          ref,
+          className: cn(
+            "w-full py-3 border rounded-xl bg-neutral-50/50 dark:bg-neutral-900/50 focus:bg-white dark:focus:bg-neutral-900 transition-all duration-200 outline-none disabled:opacity-50 disabled:cursor-not-allowed dark:text-white",
+            icon ? "pl-11 pr-4" : "px-4",
+            error ? "border-red-300 dark:border-red-800 focus:border-red-500 focus:ring-4 focus:ring-red-500/10" : "border-neutral-200 dark:border-neutral-800 hover:border-brand-orange/50 focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10",
+            className
+          ),
+          ...props
+        }
+      ),
+      icon && /* @__PURE__ */ jsx7("div", { className: cn(
+        "absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors duration-200",
+        error ? "text-red-400" : "text-neutral-400 dark:text-neutral-500"
+      ), children: icon })
+    ] });
+  }
+);
+Input.displayName = "Input";
+
+// src/components/PasswordInput.tsx
+import React3, { useState as useState4 } from "react";
+import { EyeOpenIcon, EyeNoneIcon, LockClosedIcon } from "@radix-ui/react-icons";
+import { jsx as jsx8, jsxs as jsxs7 } from "react/jsx-runtime";
+var PasswordInput = React3.forwardRef(
+  ({ className, label, required, error, ...props }, ref) => {
+    const [showPassword, setShowPassword] = useState4(false);
+    return /* @__PURE__ */ jsxs7("div", { className, children: [
+      label && /* @__PURE__ */ jsxs7("label", { className: "block mb-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300", children: [
+        label,
+        required && /* @__PURE__ */ jsx8("span", { className: "text-brand-orange text-xs ml-1", children: "(Required)" })
+      ] }),
+      /* @__PURE__ */ jsxs7("div", { className: "relative group", children: [
+        /* @__PURE__ */ jsx8(
+          Input,
+          {
+            ref,
+            type: showPassword ? "text" : "password",
+            error,
+            icon: /* @__PURE__ */ jsx8(LockClosedIcon, { className: "w-5 h-5" }),
+            className: "pr-12",
+            ...props
+          }
+        ),
+        /* @__PURE__ */ jsx8(
+          "button",
+          {
+            type: "button",
+            onClick: () => setShowPassword(!showPassword),
+            className: "absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200 focus:outline-none",
+            children: showPassword ? /* @__PURE__ */ jsx8(EyeNoneIcon, { className: "w-5 h-5" }) : /* @__PURE__ */ jsx8(EyeOpenIcon, { className: "w-5 h-5" })
+          }
+        )
+      ] }),
+      error && /* @__PURE__ */ jsx8("p", { className: "mt-1 text-xs text-red-500 font-medium ml-1", children: error })
+    ] });
+  }
+);
+PasswordInput.displayName = "PasswordInput";
 export {
+  Button,
   Footer,
   Header,
+  Input,
+  PasswordInput,
+  ThemeProviders,
   ThemeToggle,
   UserMenu
 };
