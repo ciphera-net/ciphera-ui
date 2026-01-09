@@ -34,6 +34,7 @@ __export(index_exports, {
   Footer: () => Footer,
   Header: () => Header,
   Input: () => Input,
+  Modal: () => Modal,
   PasswordInput: () => PasswordInput,
   ThemeProviders: () => ThemeProviders,
   ThemeToggle: () => ThemeToggle,
@@ -440,12 +441,65 @@ var PasswordInput = import_react6.default.forwardRef(
   }
 );
 PasswordInput.displayName = "PasswordInput";
+
+// src/components/Modal.tsx
+var import_framer_motion2 = require("framer-motion");
+var import_react_icons4 = require("@radix-ui/react-icons");
+var import_jsx_runtime9 = require("react/jsx-runtime");
+function Modal({
+  isOpen,
+  onClose,
+  title,
+  children,
+  className,
+  showCloseButton = true
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_framer_motion2.AnimatePresence, { children: isOpen && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(import_jsx_runtime9.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+      import_framer_motion2.motion.div,
+      {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        onClick: onClose,
+        className: "fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-50"
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "fixed inset-0 flex items-center justify-center p-4 z-50 pointer-events-none", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+      import_framer_motion2.motion.div,
+      {
+        initial: { opacity: 0, scale: 0.95, y: 20 },
+        animate: { opacity: 1, scale: 1, y: 0 },
+        exit: { opacity: 0, scale: 0.95, y: 20 },
+        className: cn(
+          "bg-white dark:bg-neutral-900 rounded-2xl shadow-xl w-full max-w-lg border border-neutral-200 dark:border-neutral-800 pointer-events-auto overflow-hidden",
+          className
+        ),
+        children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-6", children: [
+          (title || showCloseButton) && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex justify-between items-start mb-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { children: title && (typeof title === "string" ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "text-lg font-bold text-neutral-900 dark:text-white", children: title }) : title) }),
+            showCloseButton && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+              "button",
+              {
+                onClick: onClose,
+                className: "p-1 text-neutral-400 hover:text-neutral-500 dark:hover:text-neutral-300 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors",
+                children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react_icons4.Cross2Icon, { className: "w-5 h-5" })
+              }
+            )
+          ] }),
+          children
+        ] })
+      }
+    ) })
+  ] }) });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Button,
   Footer,
   Header,
   Input,
+  Modal,
   PasswordInput,
   ThemeProviders,
   ThemeToggle,

@@ -66,4 +66,14 @@ interface PasswordInputProps extends Omit<InputProps, 'type' | 'icon'> {
 }
 declare const PasswordInput: React.ForwardRefExoticComponent<PasswordInputProps & React.RefAttributes<HTMLInputElement>>;
 
-export { type AuthState, Button, type ButtonProps, Footer, Header, Input, type InputProps, type LinkComponentType, type LinkProps, PasswordInput, type PasswordInputProps, ThemeProviders, ThemeToggle, type User, UserMenu };
+interface ModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    title?: React.ReactNode;
+    children: React.ReactNode;
+    className?: string;
+    showCloseButton?: boolean;
+}
+declare function Modal({ isOpen, onClose, title, children, className, showCloseButton }: ModalProps): react_jsx_runtime.JSX.Element;
+
+export { type AuthState, Button, type ButtonProps, Footer, Header, Input, type InputProps, type LinkComponentType, type LinkProps, Modal, type ModalProps, PasswordInput, type PasswordInputProps, ThemeProviders, ThemeToggle, type User, UserMenu };
