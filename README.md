@@ -17,7 +17,7 @@ The shared UI component library for the **Ciphera** privacy platform ecosystem. 
 ## Installation
 
 ```bash
-npm install @ciphera/ui
+npm install @ciphera-net/ui
 ```
 
 *Note: Currently consumed as a Git submodule or local workspace package.*
@@ -44,7 +44,7 @@ const config: Config = {
 ### 2. Import Components
 
 ```tsx
-import { Header, Footer, ThemeToggle } from '@ciphera/ui'
+import { Header, Footer, ThemeToggle } from '@ciphera-net/ui'
 import Link from 'next/link' // Or 'react-router-dom' Link
 
 export default function Layout({ children }) {
