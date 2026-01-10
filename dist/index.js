@@ -233,7 +233,7 @@ function Header({
                 {
                   src: logoSrc,
                   alt: `${appName} Logo`,
-                  className: "w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  className: "w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 transform-gpu will-change-transform [backface-visibility:hidden]"
                 }
               ) }),
               /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white tracking-tight group-hover:text-brand-orange transition-colors duration-300", children: appName })
