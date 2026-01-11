@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { ThemeToggle } from './ThemeToggle'
 import UserMenu from './UserMenu'
 import { LinkComponentType, AuthState } from '../types'
+import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons'
 
 interface HeaderProps {
   auth: AuthState;
@@ -20,6 +21,7 @@ export default function Header({
 }: HeaderProps) {
   const { user, loading } = auth
   const [isVisible, setIsVisible] = useState(true)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const lastScrollY = useRef(0)
 
   useEffect(() => {
@@ -100,8 +102,48 @@ export default function Header({
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <UserMenu auth={auth} LinkComponent={Link} />
+          
+          {/* Mobile Menu Toggle */}
+          {!loading && !user && (
+            <button
+              className="md:hidden p-2 -mr-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <Cross1Icon className="w-5 h-5" /> : <HamburgerMenuIcon className="w-5 h-5" />}
+            </button>
+          )}
         </div>
       </div>
+      
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && !loading && !user && (
+        <div className="absolute top-full left-0 right-0 p-4 md:hidden animate-in slide-in-from-top-2 fade-in duration-200">
+          <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-xl p-2 flex flex-col gap-1">
+            <Link
+              href="/about"
+              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Why {appName}
+            </Link>
+            <Link
+              href="/faq"
+              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              FAQ
+            </Link>
+            <Link
+              href="/security"
+              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Security
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
