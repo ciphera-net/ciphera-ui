@@ -10,7 +10,7 @@ interface HeaderProps {
   auth: AuthState;
   LinkComponent: LinkComponentType;
   logoSrc?: string;
-  appName?: string;
+  appName?: string | React.ReactNode;
 }
 
 export default function Header({ 
