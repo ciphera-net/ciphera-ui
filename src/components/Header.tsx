@@ -6,18 +6,32 @@ import UserMenu from './UserMenu'
 import { LinkComponentType, AuthState } from '../types'
 import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons'
 
+// * This component is now responsible for fetching organizations
+// * We can't import from @/lib/api/organization because this is a shared UI library
+// * So we will accept orgs and activeOrgId as props, or fetch them if a fetcher is provided
+
 interface HeaderProps {
   auth: AuthState;
   LinkComponent: LinkComponentType;
   logoSrc?: string;
   appName?: string | React.ReactNode;
+  // * Optional props for workspace switching
+  orgs?: any[];
+  activeOrgId?: string | null;
+  onSwitchWorkspace?: (orgId: string) => void;
+  // * Optional prop to create new organization
+  onCreateOrganization?: () => void;
 }
 
 export default function Header({ 
   auth, 
   LinkComponent: Link, 
   logoSrc = "/drop_icon_no_margins.png",
-  appName = "Drop"
+  appName = "Drop",
+  orgs = [],
+  activeOrgId = null,
+  onSwitchWorkspace,
+  onCreateOrganization
 }: HeaderProps) {
   const { user, loading } = auth
   const [isVisible, setIsVisible] = useState(true)
@@ -101,7 +115,14 @@ export default function Header({
         {/* User Menu */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <UserMenu auth={auth} LinkComponent={Link} />
+          <UserMenu 
+            auth={auth} 
+            LinkComponent={Link} 
+            orgs={orgs}
+            activeOrgId={activeOrgId}
+            onSwitchWorkspace={onSwitchWorkspace}
+            onCreateOrganization={onCreateOrganization}
+          />
           
           {/* Mobile Menu Toggle */}
           {!loading && !user && (
