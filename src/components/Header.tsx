@@ -10,7 +10,7 @@ import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons'
 // * We can't import from @/lib/api/organization because this is a shared UI library
 // * So we will accept orgs and activeOrgId as props, or fetch them if a fetcher is provided
 
-interface HeaderProps {
+export interface HeaderProps {
   auth: AuthState;
   LinkComponent: LinkComponentType;
   logoSrc?: string;
