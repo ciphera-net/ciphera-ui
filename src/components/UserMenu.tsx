@@ -130,7 +130,7 @@ export default function UserMenu({ auth, LinkComponent: Link, orgs = [], activeO
                 {/* Organization Settings Link */}
                 {activeOrgId && (
                     <Link
-                      href="/settings"
+                      href="/org-settings"
                       onClick={() => setIsOpen(false)}
                       className="group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
                     >
