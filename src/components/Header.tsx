@@ -21,6 +21,7 @@ export interface HeaderProps {
   onSwitchWorkspace?: (orgId: string) => void;
   // * Optional prop to create new organization
   onCreateOrganization?: () => void;
+  allowPersonalWorkspace?: boolean;
 }
 
 export default function Header({ 
@@ -31,7 +32,8 @@ export default function Header({
   orgs = [],
   activeOrgId = null,
   onSwitchWorkspace,
-  onCreateOrganization
+  onCreateOrganization,
+  allowPersonalWorkspace = true
 }: HeaderProps) {
   const { user, loading } = auth
   const [isVisible, setIsVisible] = useState(true)
@@ -122,6 +124,7 @@ export default function Header({
             activeOrgId={activeOrgId}
             onSwitchWorkspace={onSwitchWorkspace}
             onCreateOrganization={onCreateOrganization}
+            allowPersonalWorkspace={allowPersonalWorkspace}
           />
           
           {/* Mobile Menu Toggle */}
