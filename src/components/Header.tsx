@@ -18,7 +18,7 @@ export interface HeaderProps {
   // * Optional props for workspace switching
   orgs?: any[];
   activeOrgId?: string | null;
-  onSwitchWorkspace?: (orgId: string) => void;
+  onSwitchWorkspace?: (orgId: string | null) => void;
   // * Optional prop to create new organization
   onCreateOrganization?: () => void;
   allowPersonalWorkspace?: boolean;
