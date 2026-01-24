@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { XIcon } from '../icons/generated';
 import { cn } from './Button';
 
 export interface ModalProps {
@@ -61,7 +61,7 @@ export function Modal({
                         onClick={onClose}
                         className="p-1 text-neutral-400 hover:text-neutral-500 dark:hover:text-neutral-300 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                       >
-                        <Cross2Icon className="w-5 h-5" />
+                        <XIcon className="w-5 h-5" />
                       </button>
                     )}
                   </div>

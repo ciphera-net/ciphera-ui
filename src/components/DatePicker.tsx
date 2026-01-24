@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon, Cross2Icon } from '@radix-ui/react-icons'
+import { ChevronLeftIcon, ChevronRightIcon, XIcon } from '../icons/generated'
 
 export interface DateRange {
   start: string
@@ -99,7 +99,7 @@ export default function DatePicker({ isOpen, onClose, onApply, initialRange }: D
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Select Date Range</h2>
           <button onClick={onClose} className="text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors">
-            <Cross2Icon className="w-5 h-5" />
+            <XIcon className="w-5 h-5" />
           </button>
         </div>
 

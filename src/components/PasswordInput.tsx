@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EyeOpenIcon, EyeNoneIcon, LockClosedIcon } from '@radix-ui/react-icons';
+import { EyeIcon, EyeOffIcon, LockIcon } from '../icons/generated';
 import { Input, InputProps } from './Input';
 
 export interface PasswordInputProps extends Omit<InputProps, 'type' | 'icon'> {
@@ -24,7 +24,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
             ref={ref}
             type={showPassword ? 'text' : 'password'}
             error={error}
-            icon={<LockClosedIcon className="w-5 h-5" />}
+            icon={<LockIcon className="w-5 h-5" />}
             className="pr-12" // Extra padding for toggle button
             {...props}
           />
@@ -35,9 +35,9 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
             className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200 focus:outline-none"
           >
             {showPassword ? (
-              <EyeNoneIcon className="w-5 h-5" />
+              <EyeOffIcon className="w-5 h-5" />
             ) : (
-              <EyeOpenIcon className="w-5 h-5" />
+              <EyeIcon className="w-5 h-5" />
             )}
           </button>
         </div>

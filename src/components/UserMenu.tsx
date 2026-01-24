@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ExitIcon, PersonIcon, GearIcon, DashboardIcon, ChevronDownIcon, CubeIcon } from '@radix-ui/react-icons'
+import { LogOutIcon, UserIcon, SettingsIcon, LayoutDashboardIcon, ChevronDownIcon, BoxIcon } from '../icons/generated'
 import { AuthState, LinkComponentType } from '../types'
 import WorkspaceSwitcher from './WorkspaceSwitcher'
 
@@ -55,7 +55,7 @@ export default function UserMenu({
           className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white p-1 pl-2 pr-3 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
-            <PersonIcon className="h-4 w-4" />
+            <UserIcon className="h-4 w-4" />
           </div>
           <span className="hidden sm:block max-w-[100px] truncate">{user.email?.split('@')[0]}</span>
           <ChevronDownIcon className={`h-4 w-4 text-neutral-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -96,7 +96,7 @@ export default function UserMenu({
                   onClick={() => setIsOpen(false)}
                   className="group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
                 >
-                  <DashboardIcon className="h-4 w-4 text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white" />
+                  <LayoutDashboardIcon className="h-4 w-4 text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white" />
                   Dashboard
                 </Link>
                 {activeOrgId && (
@@ -105,7 +105,7 @@ export default function UserMenu({
                       onClick={() => setIsOpen(false)}
                       className="group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
                     >
-                      <CubeIcon className="h-4 w-4 text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white" />
+                      <BoxIcon className="h-4 w-4 text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white" />
                       Organization Settings
                     </Link>
                 )}
@@ -114,7 +114,7 @@ export default function UserMenu({
                   onClick={() => setIsOpen(false)}
                   className="group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
                 >
-                  <GearIcon className="h-4 w-4 text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white" />
+                  <SettingsIcon className="h-4 w-4 text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white" />
                   Settings
                 </Link>
               </div>
@@ -127,7 +127,7 @@ export default function UserMenu({
                   }}
                   className="group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
                 >
-                  <ExitIcon className="h-4 w-4 opacity-70" />
+                  <LogOutIcon className="h-4 w-4 opacity-70" />
                   Sign Out
                 </button>
               </div>

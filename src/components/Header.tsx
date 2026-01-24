@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { ThemeToggle } from './ThemeToggle'
 import UserMenu from './UserMenu'
 import { LinkComponentType, AuthState } from '../types'
-import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons'
+import { MenuIcon, XIcon } from '../icons/generated'
 
 // * This component is now responsible for fetching organizations
 // * We can't import from @/lib/api/organization because this is a shared UI library
@@ -134,7 +134,7 @@ export default function Header({
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <Cross1Icon className="w-5 h-5" /> : <HamburgerMenuIcon className="w-5 h-5" />}
+              {isMobileMenuOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
             </button>
           )}
         </div>

@@ -4,20 +4,20 @@ import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  PersonIcon, 
-  LockClosedIcon, 
-  EnvelopeClosedIcon, 
+  UserIcon, 
+  LockIcon, 
+  MailIcon, 
   CheckIcon, 
-  ExclamationTriangleIcon, 
-  Cross2Icon, 
-  GearIcon, 
+  AlertTriangleIcon, 
+  XIcon, 
+  SettingsIcon, 
   SunIcon, 
   MoonIcon, 
-  LaptopIcon, 
-  MobileIcon, 
-  FileTextIcon, 
-  CopyIcon 
-} from '@radix-ui/react-icons'
+  LayoutDashboardIcon, 
+  MenuIcon, 
+  ArrowRightIcon, 
+  BoxIcon 
+} from '@ciphera-net/ui'
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { PasswordInput } from '../PasswordInput'
@@ -492,7 +492,7 @@ export default function ProfileSettings({
                 : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
             }`}
           >
-            <PersonIcon className="w-5 h-5" />
+            <UserIcon className="w-5 h-5" />
             Profile
           </button>
           <button
@@ -514,7 +514,7 @@ export default function ProfileSettings({
                 : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
             }`}
           >
-            <GearIcon className="w-5 h-5" />
+            <SettingsIcon className="w-5 h-5" />
             Preferences
           </button>
         </nav>
@@ -565,7 +565,7 @@ export default function ProfileSettings({
                           : 'bg-neutral-50 dark:bg-neutral-900/50 border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                       }`}
                     >
-                      <LaptopIcon className="w-6 h-6" />
+                      <LayoutDashboardIcon className="w-6 h-6" />
                       <span className="text-sm font-medium">System</span>
                     </button>
                   </div>
@@ -631,7 +631,7 @@ export default function ProfileSettings({
                             setEmail(e.target.value)
                             setIsEmailDirty(e.target.value !== user.email)
                           }}
-                          icon={<EnvelopeClosedIcon className="w-5 h-5" />}
+                          icon={<MailIcon className="w-5 h-5" />}
                         />
                       </div>
                     </div>
@@ -771,7 +771,7 @@ export default function ProfileSettings({
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-lg text-neutral-500">
-                              <FileTextIcon className="w-6 h-6" />
+                              <BoxIcon className="w-6 h-6" />
                             </div>
                             <div>
                               <h3 className="font-medium text-neutral-900 dark:text-white">Recovery Codes</h3>
@@ -802,7 +802,7 @@ export default function ProfileSettings({
 
                   {securityError && (
                     <div className="p-4 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl flex items-start gap-3 text-red-600 dark:text-red-400">
-                      <ExclamationTriangleIcon className="w-5 h-5 shrink-0 mt-0.5" />
+                      <AlertTriangleIcon className="w-5 h-5 shrink-0 mt-0.5" />
                       <span className="text-sm font-medium">{securityError}</span>
                     </div>
                   )}
@@ -940,7 +940,7 @@ export default function ProfileSettings({
                         }}
                         className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white"
                       >
-                        <Cross2Icon className="w-5 h-5" />
+                        <XIcon className="w-5 h-5" />
                       </button>
                     </div>
                     
@@ -1010,7 +1010,7 @@ export default function ProfileSettings({
                         }}
                         className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white"
                       >
-                        <Cross2Icon className="w-5 h-5" />
+                        <XIcon className="w-5 h-5" />
                       </button>
                     </div>
                     
@@ -1081,13 +1081,13 @@ export default function ProfileSettings({
                                     onClick={() => setShowRecoveryCodes(false)}
                                     className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white"
                                 >
-                                    <Cross2Icon className="w-5 h-5" />
+                                    <XIcon className="w-5 h-5" />
                                 </button>
                             </div>
                             
                             <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-900/30 rounded-lg mb-4">
                                 <p className="text-sm text-yellow-800 dark:text-yellow-200 font-medium flex items-center gap-2">
-                                    <ExclamationTriangleIcon className="w-4 h-4" />
+                                    <AlertTriangleIcon className="w-4 h-4" />
                                     Save these codes securely!
                                 </p>
                                 <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
@@ -1142,7 +1142,7 @@ export default function ProfileSettings({
                         onClick={() => setShowRegenerateConfirm(false)}
                         className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white"
                       >
-                        <Cross2Icon className="w-5 h-5" />
+                        <XIcon className="w-5 h-5" />
                       </button>
                     </div>
                     

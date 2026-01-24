@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckIcon } from '@radix-ui/react-icons';
+import { CheckIcon } from '../icons/generated';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   checked?: boolean;

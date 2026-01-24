@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { PlusIcon, PersonIcon, CubeIcon, CheckIcon } from '@radix-ui/react-icons'
+import { PlusIcon, UserIcon, BoxIcon, CheckIcon } from '../icons/generated'
 
 export interface WorkspaceSwitcherProps {
   orgs: any[]
@@ -51,7 +51,7 @@ export default function WorkspaceSwitcher({
         >
             <div className="flex items-center gap-2">
             <div className="h-5 w-5 rounded bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
-                <PersonIcon className="h-3 w-3 text-neutral-500 dark:text-neutral-400" />
+                <UserIcon className="h-3 w-3 text-neutral-500 dark:text-neutral-400" />
             </div>
             <span className="text-neutral-700 dark:text-neutral-300">Personal</span>
             </div>
@@ -73,7 +73,7 @@ export default function WorkspaceSwitcher({
         >
           <div className="flex items-center gap-2">
             <div className="h-5 w-5 rounded bg-brand-orange/10 flex items-center justify-center">
-              <CubeIcon className="h-3 w-3 text-brand-orange" />
+              <BoxIcon className="h-3 w-3 text-brand-orange" />
             </div>
             <span className="text-neutral-700 dark:text-neutral-300 truncate max-w-[140px]">
               {org.organization_name}
