@@ -21,7 +21,7 @@ Components in this library should generally be stateless (controlled) or self-co
 Do not import framework-specific globals (like `next/navigation` or `next/router`).
 *   **Navigation**: Accept a `LinkComponent` prop.
 *   **Images**: Use standard `<img>` tags or accept an `ImageComponent` prop if optimization is critical.
-*   **Icons**: Use `@radix-ui/react-icons`.
+*   **Icons**: Import from `@ciphera/ui` (e.g. `import { CheckIcon } from '@ciphera/ui'`).
 
 ### Styling
 *   Use **Tailwind CSS**.

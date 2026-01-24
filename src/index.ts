@@ -18,3 +18,4 @@ export { default as FeedbackModal, type FeedbackModalProps } from './components/
 export { default as Captcha, type CaptchaProps } from './components/Captcha'
 export { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 export { solvePoW } from './utils/pow'
+export * from './icons/generated'
