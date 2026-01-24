@@ -14,3 +14,7 @@ export { default as Select, type SelectProps, type SelectOption } from './compon
 export { default as DatePicker, type DatePickerProps, type DateRange } from './components/DatePicker'
 export { default as StatsCard, type StatsCardProps } from './components/StatsCard'
 export { default as ProfileSettings, type ProfileSettingsProps } from './components/settings/ProfileSettings'
+export { default as FeedbackModal, type FeedbackModalProps } from './components/FeedbackModal'
+export { default as Captcha, type CaptchaProps } from './components/Captcha'
+export { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
+export { solvePoW } from './utils/pow'
