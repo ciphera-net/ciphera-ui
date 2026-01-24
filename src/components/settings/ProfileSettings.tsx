@@ -73,7 +73,16 @@ export interface ProfileSettingsProps {
   refreshUser: () => Promise<void>
   logout: () => void
   renderPreferences?: React.ReactNode
+  notificationOptions?: {
+    key: string
+    label: string
+    description: string
+  }[]
 }
+
+const DEFAULT_NOTIFICATION_OPTIONS = [
+  { key: 'security_alerts', label: 'Security Alerts', description: 'Important security events like new logins.' }
+]
 
 export default function ProfileSettings({
   user,
@@ -91,7 +100,8 @@ export default function ProfileSettings({
   deriveAuthKey,
   refreshUser,
   logout,
-  renderPreferences
+  renderPreferences,
+  notificationOptions = DEFAULT_NOTIFICATION_OPTIONS
 }: ProfileSettingsProps) {
   const { theme, setTheme } = useTheme()
   const [activeTab, setActiveTab] = useState<'profile' | 'security' | 'preferences'>('profile')
@@ -143,18 +153,21 @@ export default function ProfileSettings({
   const [revokingSessionId, setRevokingSessionId] = useState<string | null>(null)
 
   // Notification Preferences State
-  const [emailNotifications, setEmailNotifications] = useState({
-    new_file_received: true,
-    file_downloaded: true,
-    security_alerts: true,
-  })
+  const [emailNotifications, setEmailNotifications] = useState<Record<string, boolean>>({})
 
   // Initialize preferences from user object
   useEffect(() => {
     if (user?.preferences?.email_notifications) {
       setEmailNotifications(user.preferences.email_notifications)
+    } else {
+      // Initialize default state from options if user prefs are empty
+      const defaults = notificationOptions.reduce((acc, option) => ({
+        ...acc,
+        [option.key]: true // Default to true or whatever logic
+      }), {})
+      setEmailNotifications(defaults)
     }
-  }, [user])
+  }, [user, notificationOptions])
 
   const handleToggleNotification = async (key: keyof typeof emailNotifications) => {
     const newState = {
@@ -565,25 +578,21 @@ export default function ProfileSettings({
                   <p className="text-sm text-neutral-500 dark:text-neutral-400">Choose what emails you want to receive.</p>
 
                   <div className="mt-4 space-y-3">
-                    {[
-                      { key: 'new_file_received', label: 'New File Received', description: 'When someone sends you a file.' },
-                      { key: 'file_downloaded', label: 'File Downloaded', description: 'When someone downloads your shared file.' },
-                      { key: 'security_alerts', label: 'Security Alerts', description: 'Important security events like new logins.' },
-                    ].map((item) => (
+                    {notificationOptions.map((item) => (
                       <div key={item.key} className="flex items-center justify-between p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl">
                         <div>
                           <span className="block text-sm font-medium text-neutral-900 dark:text-white">{item.label}</span>
                           <span className="block text-xs text-neutral-500 dark:text-neutral-400">{item.description}</span>
                         </div>
                         <button
-                          onClick={() => handleToggleNotification(item.key as keyof typeof emailNotifications)}
+                          onClick={() => handleToggleNotification(item.key)}
                           className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                            emailNotifications[item.key as keyof typeof emailNotifications] ? 'bg-brand-orange' : 'bg-neutral-200 dark:bg-neutral-700'
+                            emailNotifications[item.key] ? 'bg-brand-orange' : 'bg-neutral-200 dark:bg-neutral-700'
                           }`}
                         >
                           <span
                             className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                              emailNotifications[item.key as keyof typeof emailNotifications] ? 'translate-x-5' : 'translate-x-0'
+                              emailNotifications[item.key] ? 'translate-x-5' : 'translate-x-0'
                             }`}
                           />
                         </button>
