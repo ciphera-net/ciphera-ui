@@ -7,8 +7,7 @@ const SvgShare2Icon = (props: SVGProps<SVGSVGElement>) => (
     height="1em"
     fill="none"
     stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    strokeLinecap="square"
     strokeWidth={2}
     viewBox="0 0 24 24"
     {...props}
