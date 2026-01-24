@@ -18,6 +18,7 @@ import {
   ArrowRightIcon, 
   BoxIcon 
 } from '@ciphera-net/ui'
+import { CopyIcon, MobileIcon, LockClosedIcon } from '@radix-ui/react-icons'
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { PasswordInput } from '../PasswordInput'
