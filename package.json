@@ -1,6 +1,6 @@
 {
   "name": "@ciphera-net/ui",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Shared UI components for Ciphera applications",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
