@@ -1,11 +1,11 @@
 'use client'
 
-import React from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
 type Theme = 'dark' | 'light' | 'system'
 
 interface ThemeProviderProps {
-  children: React.ReactNode
+  children: ReactNode
   defaultTheme?: Theme
   storageKey?: string
   attribute?: string
@@ -20,7 +20,7 @@ interface ThemeContextType {
   themes: string[]
 }
 
-const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined)
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({
   children,
@@ -29,12 +29,12 @@ export function ThemeProvider({
   attribute = 'class',
   enableSystem = true,
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = React.useState<Theme>(defaultTheme)
-  const [resolvedTheme, setResolvedTheme] = React.useState<'dark' | 'light'>('light')
-  const [mounted, setMounted] = React.useState(false)
+  const [theme, setThemeState] = useState<Theme>(defaultTheme)
+  const [resolvedTheme, setResolvedTheme] = useState<'dark' | 'light'>('light')
+  const [mounted, setMounted] = useState(false)
 
   // Initial load
-  React.useEffect(() => {
+  useEffect(() => {
     const savedTheme = localStorage.getItem(storageKey) as Theme | null
     if (savedTheme) {
       setThemeState(savedTheme)
@@ -43,7 +43,7 @@ export function ThemeProvider({
   }, [storageKey])
 
   // Apply theme
-  React.useEffect(() => {
+  useEffect(() => {
     if (!mounted) return
 
     const root = window.document.documentElement
@@ -64,7 +64,7 @@ export function ThemeProvider({
   }, [theme, mounted, storageKey, enableSystem])
 
   // Listen for system changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (!enableSystem) return
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -100,7 +100,7 @@ export function ThemeProvider({
 }
 
 export const useTheme = () => {
-  const context = React.useContext(ThemeContext)
+  const context = useContext(ThemeContext)
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider')
   }
@@ -108,7 +108,7 @@ export const useTheme = () => {
 }
 
 // Wrapper for backward compatibility with existing usage of ThemeProviders
-export function ThemeProviders({ children }: { children: React.ReactNode }) {
+export function ThemeProviders({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {children}
