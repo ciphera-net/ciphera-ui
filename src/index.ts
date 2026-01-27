@@ -1,3 +1,5 @@
+'use client'
+
 export * from './types'
 export { default as Header } from './components/Header'
 export { default as Footer } from './components/Footer'
