@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React from 'react'
 
 type Theme = 'dark' | 'light' | 'system'
 
@@ -20,7 +20,7 @@ interface ThemeContextType {
   themes: string[]
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({
   children,
@@ -29,12 +29,12 @@ export function ThemeProvider({
   attribute = 'class',
   enableSystem = true,
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme)
-  const [resolvedTheme, setResolvedTheme] = useState<'dark' | 'light'>('light')
-  const [mounted, setMounted] = useState(false)
+  const [theme, setThemeState] = React.useState<Theme>(defaultTheme)
+  const [resolvedTheme, setResolvedTheme] = React.useState<'dark' | 'light'>('light')
+  const [mounted, setMounted] = React.useState(false)
 
   // Initial load
-  useEffect(() => {
+  React.useEffect(() => {
     const savedTheme = localStorage.getItem(storageKey) as Theme | null
     if (savedTheme) {
       setThemeState(savedTheme)
@@ -43,7 +43,7 @@ export function ThemeProvider({
   }, [storageKey])
 
   // Apply theme
-  useEffect(() => {
+  React.useEffect(() => {
     if (!mounted) return
 
     const root = window.document.documentElement
@@ -64,7 +64,7 @@ export function ThemeProvider({
   }, [theme, mounted, storageKey, enableSystem])
 
   // Listen for system changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (!enableSystem) return
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -100,7 +100,7 @@ export function ThemeProvider({
 }
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext)
+  const context = React.useContext(ThemeContext)
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider')
   }
