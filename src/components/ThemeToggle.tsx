@@ -1,6 +1,6 @@
 'use client'
 
-import { useTheme } from 'next-themes'
+import { useTheme } from './ThemeProviders'
 import { useEffect, useState } from 'react'
 import { MoonIcon, SunIcon } from '../icons/generated'
 

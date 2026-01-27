@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
+import { useTheme } from '../ThemeProviders'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   UserIcon, 
