@@ -88,7 +88,7 @@ export function ThemeProvider({
       setThemeState(newTheme)
     },
     resolvedTheme,
-    systemTheme: mounted ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : undefined,
+    systemTheme: (mounted ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : undefined) as 'dark' | 'light' | undefined,
     themes: ['light', 'dark', 'system']
   }
 
