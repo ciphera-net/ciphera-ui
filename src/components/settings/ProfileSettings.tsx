@@ -22,7 +22,7 @@ import { CopyIcon, MobileIcon, LockClosedIcon } from '@radix-ui/react-icons'
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { PasswordInput } from '../PasswordInput'
-import { toast } from 'sonner'
+import { toast } from '../Toast'
 
 export interface Session {
   id: string

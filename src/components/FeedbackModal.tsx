@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { toast } from 'sonner'
+import { toast } from './Toast'
 import { Modal, type ModalProps } from './Modal'
 import { Button } from './Button'
 import Captcha from './Captcha'
