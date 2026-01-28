@@ -29,9 +29,7 @@ export default function WorkspaceSwitcher({
     } catch (err) {
       console.error('Failed to switch workspace', err)
     } finally {
-        // We don't clear switching state immediately because page reload usually happens
-        // But if it fails, we should clear it
-        setTimeout(() => setSwitching(null), 1000)
+      setSwitching(null)
     }
   }
 
