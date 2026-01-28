@@ -22,6 +22,8 @@ export interface HeaderProps {
   // * Optional prop to create new organization
   onCreateOrganization?: () => void;
   allowPersonalWorkspace?: boolean;
+  /** Dashboard link in user menu (e.g. "/dashboard"). Defaults to "/". */
+  dashboardHref?: string;
 }
 
 export default function Header({ 
@@ -33,7 +35,8 @@ export default function Header({
   activeOrgId = null,
   onSwitchWorkspace,
   onCreateOrganization,
-  allowPersonalWorkspace = true
+  allowPersonalWorkspace = true,
+  dashboardHref
 }: HeaderProps) {
   const { user, loading } = auth
   const [isVisible, setIsVisible] = useState(true)
@@ -125,6 +128,7 @@ export default function Header({
             onSwitchWorkspace={onSwitchWorkspace}
             onCreateOrganization={onCreateOrganization}
             allowPersonalWorkspace={allowPersonalWorkspace}
+            dashboardHref={dashboardHref}
           />
           
           {/* Mobile Menu Toggle */}

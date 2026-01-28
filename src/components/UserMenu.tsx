@@ -15,6 +15,8 @@ interface UserMenuProps {
   onCreateOrganization?: () => void;
   createOrgHref?: string;
   allowPersonalWorkspace?: boolean;
+  /** Dashboard link href (e.g. "/dashboard" for app dashboard, "/" for marketing home). Defaults to "/". */
+  dashboardHref?: string;
 }
 
 export default function UserMenu({ 
@@ -25,7 +27,8 @@ export default function UserMenu({
   onSwitchWorkspace, 
   onCreateOrganization,
   createOrgHref,
-  allowPersonalWorkspace = true
+  allowPersonalWorkspace = true,
+  dashboardHref = '/'
 }: UserMenuProps) {
   const { user, loading, logout } = auth
   const [isOpen, setIsOpen] = useState(false)
@@ -92,7 +95,7 @@ export default function UserMenu({
               
               <div className="px-1 py-1">
                 <Link
-                  href="/"
+                  href={dashboardHref}
                   onClick={() => setIsOpen(false)}
                   className="group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
                 >
