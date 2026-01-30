@@ -22,6 +22,8 @@ export interface HeaderProps {
   dashboardHref?: string;
   /** Whether to show the FAQ link in the navigation. Defaults to true. */
   showFaq?: boolean;
+  /** Whether to show the Pricing link in the navigation. Defaults to false. */
+  showPricing?: boolean;
   /** Whether to show the Security link in the navigation. Defaults to true. */
   showSecurity?: boolean;
 }
@@ -38,6 +40,7 @@ export default function Header({
   allowPersonalWorkspace = true,
   dashboardHref,
   showFaq = true,
+  showPricing = false,
   showSecurity = true
 }: HeaderProps) {
   const { user, loading } = auth
@@ -104,6 +107,14 @@ export default function Header({
             >
               Why {appName}
             </Link>
+            {showPricing && (
+              <Link
+                href="/pricing"
+                className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+              >
+                Pricing
+              </Link>
+            )}
             {showFaq && (
               <Link
                 href="/faq"
@@ -161,6 +172,15 @@ export default function Header({
             >
               Why {appName}
             </Link>
+            {showPricing && (
+              <Link
+                href="/pricing"
+                className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+            )}
             {showFaq && (
               <Link
                 href="/faq"
