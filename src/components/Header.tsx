@@ -6,18 +6,33 @@ import UserMenu from './UserMenu'
 import { LinkComponentType, AuthState } from '../types'
 import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons'
 
-interface HeaderProps {
+export interface HeaderProps {
   auth: AuthState;
   LinkComponent: LinkComponentType;
   logoSrc?: string;
   appName?: string | React.ReactNode;
+  // * Optional props for workspace switching
+  orgs?: any[];
+  activeOrgId?: string | null;
+  onSwitchWorkspace?: (orgId: string | null) => void;
+  // * Optional prop to create new organization
+  onCreateOrganization?: () => void;
+  allowPersonalWorkspace?: boolean;
+  /** Dashboard link in user menu (e.g. "/dashboard"). Defaults to "/". */
+  dashboardHref?: string;
 }
 
 export default function Header({ 
   auth, 
   LinkComponent: Link, 
   logoSrc = "/drop_icon_no_margins.png",
-  appName = "Drop"
+  appName = "Drop",
+  orgs = [],
+  activeOrgId = null,
+  onSwitchWorkspace,
+  onCreateOrganization,
+  allowPersonalWorkspace = true,
+  dashboardHref
 }: HeaderProps) {
   const { user, loading } = auth
   const [isVisible, setIsVisible] = useState(true)
@@ -101,7 +116,16 @@ export default function Header({
         {/* User Menu */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <UserMenu auth={auth} LinkComponent={Link} />
+          <UserMenu 
+            auth={auth} 
+            LinkComponent={Link} 
+            orgs={orgs}
+            activeOrgId={activeOrgId}
+            onSwitchWorkspace={onSwitchWorkspace}
+            onCreateOrganization={onCreateOrganization}
+            allowPersonalWorkspace={allowPersonalWorkspace}
+            dashboardHref={dashboardHref}
+          />
           
           {/* Mobile Menu Toggle */}
           {!loading && !user && (
