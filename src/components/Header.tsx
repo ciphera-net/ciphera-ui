@@ -4,39 +4,20 @@ import { useState, useEffect, useRef } from 'react'
 import { ThemeToggle } from './ThemeToggle'
 import UserMenu from './UserMenu'
 import { LinkComponentType, AuthState } from '../types'
-import { MenuIcon, XIcon } from '../icons/generated'
+import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons'
 
-// * This component is now responsible for fetching organizations
-// * We can't import from @/lib/api/organization because this is a shared UI library
-// * So we will accept orgs and activeOrgId as props, or fetch them if a fetcher is provided
-
-export interface HeaderProps {
+interface HeaderProps {
   auth: AuthState;
   LinkComponent: LinkComponentType;
   logoSrc?: string;
   appName?: string | React.ReactNode;
-  // * Optional props for workspace switching
-  orgs?: any[];
-  activeOrgId?: string | null;
-  onSwitchWorkspace?: (orgId: string | null) => void;
-  // * Optional prop to create new organization
-  onCreateOrganization?: () => void;
-  allowPersonalWorkspace?: boolean;
-  /** Dashboard link in user menu (e.g. "/dashboard"). Defaults to "/". */
-  dashboardHref?: string;
 }
 
 export default function Header({ 
   auth, 
   LinkComponent: Link, 
   logoSrc = "/drop_icon_no_margins.png",
-  appName = "Drop",
-  orgs = [],
-  activeOrgId = null,
-  onSwitchWorkspace,
-  onCreateOrganization,
-  allowPersonalWorkspace = true,
-  dashboardHref
+  appName = "Drop"
 }: HeaderProps) {
   const { user, loading } = auth
   const [isVisible, setIsVisible] = useState(true)
@@ -98,9 +79,15 @@ export default function Header({
           <nav className="hidden md:flex items-center gap-1">
             <Link
               href="/about"
-              className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200 whitespace-nowrap"
+              className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
             >
               Why {appName}
+            </Link>
+            <Link
+              href="/faq"
+              className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+            >
+              FAQ
             </Link>
             <Link
               href="/security"
@@ -114,16 +101,7 @@ export default function Header({
         {/* User Menu */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <UserMenu 
-            auth={auth} 
-            LinkComponent={Link} 
-            orgs={orgs}
-            activeOrgId={activeOrgId}
-            onSwitchWorkspace={onSwitchWorkspace}
-            onCreateOrganization={onCreateOrganization}
-            allowPersonalWorkspace={allowPersonalWorkspace}
-            dashboardHref={dashboardHref}
-          />
+          <UserMenu auth={auth} LinkComponent={Link} />
           
           {/* Mobile Menu Toggle */}
           {!loading && !user && (
@@ -132,7 +110,7 @@ export default function Header({
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+              {isMobileMenuOpen ? <Cross1Icon className="w-5 h-5" /> : <HamburgerMenuIcon className="w-5 h-5" />}
             </button>
           )}
         </div>
@@ -144,10 +122,17 @@ export default function Header({
           <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-xl p-2 flex flex-col gap-1">
             <Link
               href="/about"
-              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200 whitespace-nowrap"
+              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Why {appName}
+            </Link>
+            <Link
+              href="/faq"
+              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              FAQ
             </Link>
             <Link
               href="/security"
