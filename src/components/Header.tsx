@@ -20,6 +20,10 @@ export interface HeaderProps {
   allowPersonalWorkspace?: boolean;
   /** Dashboard link in user menu (e.g. "/dashboard"). Defaults to "/". */
   dashboardHref?: string;
+  /** Whether to show the FAQ link in the navigation. Defaults to true. */
+  showFaq?: boolean;
+  /** Whether to show the Security link in the navigation. Defaults to true. */
+  showSecurity?: boolean;
 }
 
 export default function Header({ 
@@ -32,7 +36,9 @@ export default function Header({
   onSwitchWorkspace,
   onCreateOrganization,
   allowPersonalWorkspace = true,
-  dashboardHref
+  dashboardHref,
+  showFaq = true,
+  showSecurity = true
 }: HeaderProps) {
   const { user, loading } = auth
   const [isVisible, setIsVisible] = useState(true)
@@ -98,18 +104,22 @@ export default function Header({
             >
               Why {appName}
             </Link>
-            <Link
-              href="/faq"
-              className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-            >
-              FAQ
-            </Link>
-            <Link
-              href="/security"
-              className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-            >
-              Security
-            </Link>
+            {showFaq && (
+              <Link
+                href="/faq"
+                className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+              >
+                FAQ
+              </Link>
+            )}
+            {showSecurity && (
+              <Link
+                href="/security"
+                className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+              >
+                Security
+              </Link>
+            )}
           </nav>
         )}
 
@@ -151,20 +161,24 @@ export default function Header({
             >
               Why {appName}
             </Link>
-            <Link
-              href="/faq"
-              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              FAQ
-            </Link>
-            <Link
-              href="/security"
-              className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Security
-            </Link>
+            {showFaq && (
+              <Link
+                href="/faq"
+                className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                FAQ
+              </Link>
+            )}
+            {showSecurity && (
+              <Link
+                href="/security"
+                className="px-4 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-xl hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Security
+              </Link>
+            )}
           </div>
         </div>
       )}
