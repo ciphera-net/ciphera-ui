@@ -6,7 +6,7 @@ interface FooterProps {
   LinkComponent: LinkComponentType;
   onFeedbackClick?: () => void;
   appName?: string;
-  year?: number;
+  year?: string | number;
   aboutText?: string;
 }
 
