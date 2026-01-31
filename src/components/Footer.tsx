@@ -9,6 +9,7 @@ interface FooterProps {
   year?: string | number;
   aboutText?: string;
   showPricing?: boolean;
+  showSecurity?: boolean;
 }
 
 export default function Footer({ 
@@ -17,7 +18,8 @@ export default function Footer({
   appName = "Ciphera Drop",
   year = new Date().getFullYear(),
   aboutText = "About",
-  showPricing = false
+  showPricing = false,
+  showSecurity = true
 }: FooterProps) {
   return (
     <footer className="w-full py-8 mt-auto border-t border-neutral-100 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm">
@@ -49,12 +51,14 @@ export default function Footer({
           >
             FAQ
           </Link>
-          <Link 
-            href="/security" 
-            className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-brand-orange dark:hover:text-brand-orange transition-colors"
-          >
-            Security
-          </Link>
+          {showSecurity && (
+            <Link 
+              href="/security" 
+              className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-brand-orange dark:hover:text-brand-orange transition-colors"
+            >
+              Security
+            </Link>
+          )}
             {onFeedbackClick && (
               <button
                 onClick={onFeedbackClick}
