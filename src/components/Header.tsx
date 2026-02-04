@@ -30,6 +30,8 @@ export interface HeaderProps {
   bottomContent?: React.ReactNode;
   /** Optional top offset (e.g. "2.5rem") when a fixed bar sits above the header. */
   topOffset?: string;
+  /** Custom items to render in the user menu before the sign out button */
+  userMenuCustomItems?: React.ReactNode;
 }
 
 export default function Header({ 
@@ -47,7 +49,8 @@ export default function Header({
   showPricing = false,
   showSecurity = true,
   bottomContent,
-  topOffset
+  topOffset,
+  userMenuCustomItems
 }: HeaderProps) {
   const { user, loading } = auth
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -124,6 +127,7 @@ export default function Header({
             onCreateOrganization={onCreateOrganization}
             allowPersonalWorkspace={allowPersonalWorkspace}
             dashboardHref={dashboardHref}
+            customItems={userMenuCustomItems}
           />
           
           {/* Mobile Menu Toggle */}

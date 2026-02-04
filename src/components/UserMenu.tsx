@@ -17,6 +17,8 @@ interface UserMenuProps {
   allowPersonalWorkspace?: boolean;
   /** Dashboard link href (e.g. "/dashboard" for app dashboard, "/" for marketing home). Defaults to "/". */
   dashboardHref?: string;
+  /** Custom items to render in the user menu before the sign out button */
+  customItems?: React.ReactNode;
 }
 
 export default function UserMenu({ 
@@ -28,7 +30,8 @@ export default function UserMenu({
   onCreateOrganization,
   createOrgHref,
   allowPersonalWorkspace = true,
-  dashboardHref = '/'
+  dashboardHref = '/',
+  customItems
 }: UserMenuProps) {
   const { user, loading, logout } = auth
   const [isOpen, setIsOpen] = useState(false)
@@ -102,6 +105,11 @@ export default function UserMenu({
                   <LayoutDashboardIcon className="h-4 w-4 text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white" />
                   Dashboard
                 </Link>
+                {customItems && (
+                  <div onClick={() => setIsOpen(false)}>
+                    {customItems}
+                  </div>
+                )}
                 {activeOrgId && (
                     <Link
                       href="/org-settings"
