@@ -26,6 +26,8 @@ export interface HeaderProps {
   showPricing?: boolean;
   /** Whether to show the Security link in the navigation. Defaults to true. */
   showSecurity?: boolean;
+  /** Optional content rendered below the main header row (e.g. offline banner). */
+  bottomContent?: React.ReactNode;
 }
 
 export default function Header({ 
@@ -41,7 +43,8 @@ export default function Header({
   dashboardHref,
   showFaq = true,
   showPricing = false,
-  showSecurity = true
+  showSecurity = true,
+  bottomContent
 }: HeaderProps) {
   const { user, loading } = auth
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -50,7 +53,8 @@ export default function Header({
     <header 
       className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pt-4 sm:pt-6 transition-transform duration-300 translate-y-0"
     >
-      <div className="flex w-full max-w-6xl items-center justify-between rounded-2xl border border-neutral-200/60 dark:border-neutral-800/60 bg-white/70 dark:bg-neutral-900/70 px-4 sm:px-8 py-3.5 shadow-xl shadow-neutral-500/10 dark:shadow-black/20 backdrop-blur-2xl transition-all duration-300 supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-neutral-900/50 hover:shadow-2xl hover:shadow-neutral-500/15 dark:hover:shadow-black/30">
+      <div className="flex w-full max-w-6xl flex-col gap-0">
+        <div className={`flex w-full items-center justify-between border border-neutral-200/60 dark:border-neutral-800/60 bg-white/70 dark:bg-neutral-900/70 px-4 sm:px-8 py-3.5 shadow-xl shadow-neutral-500/10 dark:shadow-black/20 backdrop-blur-2xl transition-all duration-300 supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-neutral-900/50 hover:shadow-2xl hover:shadow-neutral-500/15 dark:hover:shadow-black/30 ${bottomContent ? 'rounded-t-2xl border-b-0' : 'rounded-2xl'}`}>
         {/* Logo Section */}
         <Link 
           href="/" 
@@ -129,8 +133,14 @@ export default function Header({
             </button>
           )}
         </div>
+        </div>
+        {bottomContent && (
+          <div className="rounded-b-2xl border border-t-0 border-neutral-200/60 dark:border-neutral-800/60 bg-white/70 dark:bg-neutral-900/70 shadow-xl shadow-neutral-500/10 dark:shadow-black/20 backdrop-blur-2xl supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-neutral-900/50 py-2">
+            {bottomContent}
+          </div>
+        )}
       </div>
-      
+
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && !loading && !user && (
         <div className="absolute top-full left-0 right-0 p-4 md:hidden animate-in slide-in-from-top-2 fade-in duration-200">
