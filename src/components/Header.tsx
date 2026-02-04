@@ -135,7 +135,7 @@ export default function Header({
         </div>
         </div>
         {bottomContent && (
-          <div className="rounded-b-2xl border border-t-0 border-neutral-200/60 dark:border-neutral-800/60 bg-white/70 dark:bg-neutral-900/70 shadow-xl shadow-neutral-500/10 dark:shadow-black/20 backdrop-blur-2xl supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-neutral-900/50 py-2">
+          <div className="overflow-hidden rounded-b-2xl border border-t-0 border-neutral-200/60 dark:border-neutral-800/60 bg-white/70 dark:bg-neutral-900/70 shadow-xl shadow-neutral-500/10 dark:shadow-black/20 backdrop-blur-2xl supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-neutral-900/50 py-2">
             {bottomContent}
           </div>
         )}
