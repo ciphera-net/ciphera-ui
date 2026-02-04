@@ -32,6 +32,8 @@ export interface HeaderProps {
   topOffset?: string;
   /** Custom items to render in the user menu before the sign out button */
   userMenuCustomItems?: React.ReactNode;
+  /** Custom navigation items to render in the header bar (e.g. "Tools") */
+  customNavItems?: React.ReactNode;
 }
 
 export default function Header({ 
@@ -50,7 +52,8 @@ export default function Header({
   showSecurity = true,
   bottomContent,
   topOffset,
-  userMenuCustomItems
+  userMenuCustomItems,
+  customNavItems
 }: HeaderProps) {
   const { user, loading } = auth
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -112,6 +115,13 @@ export default function Header({
                 Security
               </Link>
             )}
+          </nav>
+        )}
+
+        {/* Custom Nav Items - Visible always (controlled by consumer) */}
+        {customNavItems && (
+          <nav className="hidden md:flex items-center gap-1">
+            {customNavItems}
           </nav>
         )}
 
