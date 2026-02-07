@@ -83,44 +83,42 @@ export default function Header({
         </Link>
 
         {/* Navigation Links - Hidden on mobile and for logged-in users */}
-        {!loading && !user && (
+        {(!loading && !user || customNavItems) && (
           <nav className="hidden md:flex items-center gap-1">
-            <Link
-              href="/about"
-              className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-            >
-              Why {appName}
-            </Link>
-            {showPricing && (
-              <Link
-                href="/pricing"
-                className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-              >
-                Pricing
-              </Link>
+            {!loading && !user && (
+              <>
+                <Link
+                  href="/about"
+                  className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                >
+                  Why {appName}
+                </Link>
+                {showPricing && (
+                  <Link
+                    href="/pricing"
+                    className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                  >
+                    Pricing
+                  </Link>
+                )}
+                {showFaq && (
+                  <Link
+                    href="/faq"
+                    className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                  >
+                    FAQ
+                  </Link>
+                )}
+                {showSecurity && (
+                  <Link
+                    href="/security"
+                    className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                  >
+                    Security
+                  </Link>
+                )}
+              </>
             )}
-            {showFaq && (
-              <Link
-                href="/faq"
-                className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-              >
-                FAQ
-              </Link>
-            )}
-            {showSecurity && (
-              <Link
-                href="/security"
-                className="px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
-              >
-                Security
-              </Link>
-            )}
-          </nav>
-        )}
-
-        {/* Custom Nav Items - Visible always (controlled by consumer) */}
-        {customNavItems && (
-          <nav className="hidden md:flex items-center gap-1">
             {customNavItems}
           </nav>
         )}
