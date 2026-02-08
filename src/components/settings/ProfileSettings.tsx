@@ -641,13 +641,14 @@ export default function ProfileSettings({
 
             {activeTab === 'profile' && (
               <div className="space-y-12">
-                {onUpdateDisplayName && (
-                  <form onSubmit={handleUpdateDisplayName} className="space-y-6">
-                    <div>
-                      <h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-1">Display name</h2>
-                      <p className="text-sm text-neutral-500 dark:text-neutral-400">How you&apos;d like to be called.</p>
-                    </div>
-                    <div className="space-y-4">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-1">Profile Information</h2>
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400">Your display name and email.</p>
+                  </div>
+
+                  {onUpdateDisplayName && (
+                    <form onSubmit={handleUpdateDisplayName} className="space-y-4">
                       <div className="space-y-1.5">
                         <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                           Display name
@@ -665,27 +666,20 @@ export default function ProfileSettings({
                           icon={<UserIcon className="w-5 h-5" />}
                         />
                       </div>
-                    </div>
-                    <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
-                      <Button
-                        type="submit"
-                        disabled={!isDisplayNameDirty || loadingDisplayName}
-                        isLoading={loadingDisplayName}
-                      >
-                        <CheckIcon className="w-4 h-4 mr-2" />
-                        Save display name
-                      </Button>
-                    </div>
-                  </form>
-                )}
+                      <div className="flex justify-end">
+                        <Button
+                          type="submit"
+                          disabled={!isDisplayNameDirty || loadingDisplayName}
+                          isLoading={loadingDisplayName}
+                        >
+                          <CheckIcon className="w-4 h-4 mr-2" />
+                          Save display name
+                        </Button>
+                      </div>
+                    </form>
+                  )}
 
-                <form onSubmit={handleUpdateProfile} className="space-y-6">
-                  <div>
-                    <h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-1">Profile Information</h2>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400">Update your account details.</p>
-                  </div>
-
-                  <div className="space-y-4">
+                  <form onSubmit={handleUpdateProfile} className="space-y-4">
                     <div className="space-y-1.5">
                       <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                         Email Address
@@ -702,19 +696,18 @@ export default function ProfileSettings({
                         />
                       </div>
                     </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
-                    <Button
-                      type="submit"
-                      disabled={!isEmailDirty || loadingProfile}
-                      isLoading={loadingProfile}
-                    >
-                      <CheckIcon className="w-4 h-4 mr-2" />
-                      Save Changes
-                    </Button>
-                  </div>
-                </form>
+                    <div className="flex justify-end">
+                      <Button
+                        type="submit"
+                        disabled={!isEmailDirty || loadingProfile}
+                        isLoading={loadingProfile}
+                      >
+                        <CheckIcon className="w-4 h-4 mr-2" />
+                        Save email
+                      </Button>
+                    </div>
+                  </form>
+                </div>
 
                 <div className="space-y-6">
                   <div>

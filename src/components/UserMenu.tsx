@@ -63,7 +63,7 @@ export default function UserMenu({
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">
             <UserIcon className="h-4 w-4" />
           </div>
-          <span className="hidden sm:block max-w-[100px] truncate">{user.email?.split('@')[0]}</span>
+          <span className="hidden sm:block max-w-[100px] truncate">{user.display_name?.trim() || user.email?.split('@')[0]}</span>
           <ChevronDownIcon className={`h-4 w-4 text-neutral-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 
@@ -79,6 +79,9 @@ export default function UserMenu({
               <div className="px-1 py-1">
                 <div className="px-3 py-2 text-xs text-neutral-500 dark:text-neutral-400">
                   Signed in as <br />
+                  {user.display_name?.trim() && (
+                    <span className="font-medium text-neutral-900 dark:text-white truncate block">{user.display_name}</span>
+                  )}
                   <span className="font-medium text-neutral-900 dark:text-white truncate block">{user.email}</span>
                 </div>
               </div>
