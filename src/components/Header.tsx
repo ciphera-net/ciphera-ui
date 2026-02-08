@@ -11,13 +11,13 @@ export interface HeaderProps {
   LinkComponent: LinkComponentType;
   logoSrc?: string;
   appName?: string | React.ReactNode;
-  // * Optional props for workspace switching
+  // * Optional props for organization switching
   orgs?: any[];
   activeOrgId?: string | null;
-  onSwitchWorkspace?: (orgId: string | null) => void;
+  onSwitchOrganization?: (orgId: string | null) => void;
   // * Optional prop to create new organization
   onCreateOrganization?: () => void;
-  allowPersonalWorkspace?: boolean;
+  allowPersonalOrganization?: boolean;
   /** Dashboard link in user menu (e.g. "/dashboard"). Defaults to "/". */
   dashboardHref?: string;
   /** Whether to show the FAQ link in the navigation. Defaults to true. */
@@ -43,9 +43,9 @@ export default function Header({
   appName = "Drop",
   orgs = [],
   activeOrgId = null,
-  onSwitchWorkspace,
+  onSwitchOrganization,
   onCreateOrganization,
-  allowPersonalWorkspace = true,
+  allowPersonalOrganization = true,
   dashboardHref,
   showFaq = true,
   showPricing = false,
@@ -131,9 +131,9 @@ export default function Header({
             LinkComponent={Link} 
             orgs={orgs}
             activeOrgId={activeOrgId}
-            onSwitchWorkspace={onSwitchWorkspace}
+            onSwitchOrganization={onSwitchOrganization}
             onCreateOrganization={onCreateOrganization}
-            allowPersonalWorkspace={allowPersonalWorkspace}
+            allowPersonalOrganization={allowPersonalOrganization}
             dashboardHref={dashboardHref}
             customItems={userMenuCustomItems}
           />

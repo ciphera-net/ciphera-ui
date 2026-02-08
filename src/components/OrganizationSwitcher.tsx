@@ -3,31 +3,31 @@
 import React, { useState } from 'react'
 import { PlusIcon, UserIcon, BoxIcon, CheckIcon } from '../icons/generated'
 
-export interface WorkspaceSwitcherProps {
+export interface OrganizationSwitcherProps {
   orgs: any[]
   activeOrgId: string | null
   onSwitch: (orgId: string | null) => void
   onCreate?: () => void
   createHref?: string
-  allowPersonalWorkspace?: boolean
+  allowPersonalOrganization?: boolean
 }
 
-export default function WorkspaceSwitcher({ 
-  orgs, 
-  activeOrgId, 
-  onSwitch, 
-  onCreate, 
+export default function OrganizationSwitcher({
+  orgs,
+  activeOrgId,
+  onSwitch,
+  onCreate,
   createHref,
-  allowPersonalWorkspace = true 
-}: WorkspaceSwitcherProps) {
+  allowPersonalOrganization = true
+}: OrganizationSwitcherProps) {
   const [switching, setSwitching] = useState<string | null>(null)
-  
+
   const handleSwitch = async (orgId: string | null) => {
     setSwitching(orgId || 'personal')
     try {
       await onSwitch(orgId)
     } catch (err) {
-      console.error('Failed to switch workspace', err)
+      console.error('Failed to switch organization', err)
     } finally {
       setSwitching(null)
     }
@@ -36,11 +36,11 @@ export default function WorkspaceSwitcher({
   return (
     <div className="border-b border-neutral-100 dark:border-neutral-800 pb-2 mb-2">
       <div className="px-3 py-2 text-xs font-medium text-neutral-500 uppercase tracking-wider">
-        Workspaces
+        Organizations
       </div>
-      
-      {/* Personal Workspace */}
-      {allowPersonalWorkspace && (
+
+      {/* Personal organization context */}
+      {allowPersonalOrganization && (
         <button
             onClick={() => handleSwitch(null)}
             className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-md transition-colors group ${
@@ -59,8 +59,8 @@ export default function WorkspaceSwitcher({
             </div>
         </button>
       )}
-      
-      {/* Organization Workspaces */}
+
+      {/* Organization list */}
       {orgs.map((org) => (
         <button
           key={org.organization_id}

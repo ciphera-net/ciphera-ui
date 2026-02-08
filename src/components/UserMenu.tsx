@@ -4,17 +4,17 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LogOutIcon, UserIcon, SettingsIcon, LayoutDashboardIcon, ChevronDownIcon, BoxIcon } from '../icons/generated'
 import { AuthState, LinkComponentType } from '../types'
-import WorkspaceSwitcher from './WorkspaceSwitcher'
+import OrganizationSwitcher from './OrganizationSwitcher'
 
 interface UserMenuProps {
   auth: AuthState;
   LinkComponent: LinkComponentType;
   orgs?: any[];
   activeOrgId?: string | null;
-  onSwitchWorkspace?: (orgId: string | null) => void;
+  onSwitchOrganization?: (orgId: string | null) => void;
   onCreateOrganization?: () => void;
   createOrgHref?: string;
-  allowPersonalWorkspace?: boolean;
+  allowPersonalOrganization?: boolean;
   /** Dashboard link href (e.g. "/dashboard" for app dashboard, "/" for marketing home). Defaults to "/". */
   dashboardHref?: string;
   /** Custom items to render in the user menu before the sign out button */
@@ -26,10 +26,10 @@ export default function UserMenu({
   LinkComponent: Link, 
   orgs = [], 
   activeOrgId = null, 
-  onSwitchWorkspace, 
+  onSwitchOrganization,
   onCreateOrganization,
   createOrgHref,
-  allowPersonalWorkspace = true,
+  allowPersonalOrganization = true,
   dashboardHref = '/',
   customItems
 }: UserMenuProps) {
@@ -87,14 +87,14 @@ export default function UserMenu({
               </div>
               
               <div className="px-1 py-1">
-                {orgs.length > 0 && onSwitchWorkspace && (
-                    <WorkspaceSwitcher 
+                {orgs.length > 0 && onSwitchOrganization && (
+                    <OrganizationSwitcher
                         orgs={orgs}
                         activeOrgId={activeOrgId}
-                        onSwitch={onSwitchWorkspace}
+                        onSwitch={onSwitchOrganization}
                         onCreate={onCreateOrganization}
                         createHref={createOrgHref}
-                        allowPersonalWorkspace={allowPersonalWorkspace}
+                        allowPersonalOrganization={allowPersonalOrganization}
                     />
                 )}
               </div>
