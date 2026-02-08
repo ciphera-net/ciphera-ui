@@ -50,6 +50,7 @@ export interface RegenerateCodesResponse {
 export interface ProfileSettingsProps {
   user: {
     email: string
+    display_name?: string
     totp_enabled: boolean
     preferences?: {
       email_notifications?: {
@@ -60,6 +61,7 @@ export interface ProfileSettingsProps {
     }
   }
   onUpdateProfile: (email: string, currentPasswordDerived: string, newDerivedKey: string) => Promise<void>
+  onUpdateDisplayName?: (displayName: string) => Promise<void>
   onUpdatePassword: (currentPasswordDerived: string, newDerivedKey: string) => Promise<void>
   onDeleteAccount: (passwordDerived: string) => Promise<void>
   onDeleteAllFiles?: () => Promise<void>
@@ -88,6 +90,7 @@ const DEFAULT_NOTIFICATION_OPTIONS = [
 export default function ProfileSettings({
   user,
   onUpdateProfile,
+  onUpdateDisplayName,
   onUpdatePassword,
   onDeleteAccount,
   onDeleteAllFiles,
@@ -111,6 +114,9 @@ export default function ProfileSettings({
   const [email, setEmail] = useState(user?.email || '')
   const [isEmailDirty, setIsEmailDirty] = useState(false)
   const [loadingProfile, setLoadingProfile] = useState(false)
+  const [displayName, setDisplayName] = useState(user?.display_name ?? '')
+  const [isDisplayNameDirty, setIsDisplayNameDirty] = useState(false)
+  const [loadingDisplayName, setLoadingDisplayName] = useState(false)
 
   // Update email when user data loads
   useEffect(() => {
@@ -119,6 +125,12 @@ export default function ProfileSettings({
       setIsEmailDirty(false)
     }
   }, [user?.email])
+
+  // Update display name when user data loads
+  useEffect(() => {
+    setDisplayName(user?.display_name ?? '')
+    setIsDisplayNameDirty(false)
+  }, [user?.display_name])
   
   // Email Password Prompt State
   const [showEmailPasswordPrompt, setShowEmailPasswordPrompt] = useState(false)
@@ -188,6 +200,22 @@ export default function ProfileSettings({
         ...prev,
         [key]: !prev[key]
       }))
+    }
+  }
+
+  const handleUpdateDisplayName = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!onUpdateDisplayName || !isDisplayNameDirty) return
+    setLoadingDisplayName(true)
+    try {
+      await onUpdateDisplayName(displayName.trim())
+      toast.success('Display name updated')
+      await refreshUser()
+      setIsDisplayNameDirty(false)
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to update display name')
+    } finally {
+      setLoadingDisplayName(false)
     }
   }
 
@@ -613,6 +641,44 @@ export default function ProfileSettings({
 
             {activeTab === 'profile' && (
               <div className="space-y-12">
+                {onUpdateDisplayName && (
+                  <form onSubmit={handleUpdateDisplayName} className="space-y-6">
+                    <div>
+                      <h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-1">Display name</h2>
+                      <p className="text-sm text-neutral-500 dark:text-neutral-400">How you&apos;d like to be called.</p>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="space-y-1.5">
+                        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                          Display name
+                        </label>
+                        <Input
+                          type="text"
+                          value={displayName}
+                          onChange={(e) => {
+                            const val = e.target.value.slice(0, 100)
+                            setDisplayName(val)
+                            setIsDisplayNameDirty(val !== (user?.display_name ?? ''))
+                          }}
+                          placeholder="How you'd like to be called"
+                          maxLength={100}
+                          icon={<UserIcon className="w-5 h-5" />}
+                        />
+                      </div>
+                    </div>
+                    <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
+                      <Button
+                        type="submit"
+                        disabled={!isDisplayNameDirty || loadingDisplayName}
+                        isLoading={loadingDisplayName}
+                      >
+                        <CheckIcon className="w-4 h-4 mr-2" />
+                        Save display name
+                      </Button>
+                    </div>
+                  </form>
+                )}
+
                 <form onSubmit={handleUpdateProfile} className="space-y-6">
                   <div>
                     <h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-1">Profile Information</h2>
