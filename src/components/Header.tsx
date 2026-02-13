@@ -34,6 +34,8 @@ export interface HeaderProps {
   userMenuCustomItems?: React.ReactNode;
   /** Custom navigation items to render in the header bar (e.g. "Tools") */
   customNavItems?: React.ReactNode;
+  /** Content to render between theme toggle and user menu (e.g. notification bell) */
+  rightSideActions?: React.ReactNode;
 }
 
 export default function Header({ 
@@ -53,7 +55,8 @@ export default function Header({
   bottomContent,
   topOffset,
   userMenuCustomItems,
-  customNavItems
+  customNavItems,
+  rightSideActions
 }: HeaderProps) {
   const { user, loading } = auth
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -126,6 +129,7 @@ export default function Header({
         {/* User Menu */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
+          {rightSideActions}
           <UserMenu 
             auth={auth} 
             LinkComponent={Link} 
