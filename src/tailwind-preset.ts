@@ -27,6 +27,7 @@ const config: Omit<Config, 'content'> = {
         },
         ':root': {
           '--color-brand-orange': '#FD5E0F',
+          '--color-brand-orange-rgb': '253, 94, 15',
           '--color-neutral-50': '#fafafa',
           '--color-neutral-100': '#f5f5f5',
           '--color-neutral-200': '#e5e5e5',
@@ -102,9 +103,9 @@ const config: Omit<Config, 'content'> = {
           backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)',
           backgroundSize: '32px 32px',
         },
-        /* * Orange glow effect */
+        /* * Orange glow effect - uses brand token for consistency */
         '.glow-orange': {
-          boxShadow: '0 0 40px -10px rgba(253, 94, 15, 0.5)',
+          boxShadow: '0 0 40px -10px rgba(var(--color-brand-orange-rgb), 0.5)',
         },
       })
     })
