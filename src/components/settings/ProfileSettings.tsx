@@ -67,7 +67,7 @@ export interface ProfileSettingsProps {
   onDeleteAllFiles?: () => Promise<void>
   onSetup2FA: () => Promise<Setup2FAResponse>
   onVerify2FA: (code: string) => Promise<Verify2FAResponse>
-  onDisable2FA: () => Promise<void>
+  onDisable2FA: (passwordDerived: string) => Promise<void>
   onRegenerateRecoveryCodes: () => Promise<RegenerateCodesResponse>
   onGetSessions: () => Promise<{ sessions: Session[] }>
   onRevokeSession: (sessionId: string) => Promise<void>
@@ -148,6 +148,8 @@ export default function ProfileSettings({
   const [twoFAData, setTwoFAData] = useState<Setup2FAResponse | null>(null)
   const [twoFACode, setTwoFACode] = useState('')
   const [loading2FA, setLoading2FA] = useState(false)
+  const [showDisable2FAPrompt, setShowDisable2FAPrompt] = useState(false)
+  const [disable2FAPassword, setDisable2FAPassword] = useState('')
 
   // Recovery Codes State
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([])
@@ -358,14 +360,19 @@ export default function ProfileSettings({
     }
   }
 
-  const handleDisable2FA = async () => {
+  const handleDisable2FA = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!user?.email) return
     setLoading2FA(true)
     try {
-      await onDisable2FA()
+      const derivedKey = await deriveAuthKey(disable2FAPassword, user.email)
+      await onDisable2FA(derivedKey)
       toast.success('2FA disabled successfully')
+      setShowDisable2FAPrompt(false)
+      setDisable2FAPassword('')
       await refreshUser()
     } catch (err: any) {
-      toast.error('Failed to disable 2FA')
+      toast.error(err?.message?.includes('Invalid') ? 'Invalid password' : 'Failed to disable 2FA')
     } finally {
       setLoading2FA(false)
     }
@@ -755,7 +762,7 @@ export default function ProfileSettings({
                         
                         {user.totp_enabled ? (
                           <button
-                            onClick={handleDisable2FA}
+                            onClick={() => setShowDisable2FAPrompt(true)}
                             disabled={loading2FA}
                             className="px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors"
                           >
@@ -1113,6 +1120,74 @@ export default function ProfileSettings({
                         >
                           {loadingDelete ? 'Deleting...' : 'Delete Forever'}
                         </button>
+                      </div>
+                    </form>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Disable 2FA Password Modal */}
+            <AnimatePresence>
+              {showDisable2FAPrompt && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 z-10 flex items-center justify-center bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm rounded-2xl p-4"
+                >
+                  <motion.div
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.95, opacity: 0 }}
+                    className="w-full max-w-sm bg-white dark:bg-neutral-900 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl"
+                  >
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">Disable 2FA</h3>
+                      <button
+                        onClick={() => {
+                          setShowDisable2FAPrompt(false)
+                          setDisable2FAPassword('')
+                        }}
+                        className="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white"
+                      >
+                        <XIcon className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                      Enter your password to confirm you want to disable two-factor authentication.
+                    </p>
+
+                    <form onSubmit={handleDisable2FA} className="space-y-4">
+                      <PasswordInput
+                        label="Password"
+                        value={disable2FAPassword}
+                        onChange={(e) => setDisable2FAPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                        className="mb-2"
+                      />
+
+                      <div className="flex gap-3">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowDisable2FAPrompt(false)
+                            setDisable2FAPassword('')
+                          }}
+                          className="flex-1 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-colors"
+                        >
+                          Cancel
+                        </button>
+                        <Button
+                          type="submit"
+                          disabled={!disable2FAPassword || loading2FA}
+                          isLoading={loading2FA}
+                          className="flex-1"
+                        >
+                          Disable 2FA
+                        </Button>
                       </div>
                     </form>
                   </motion.div>
