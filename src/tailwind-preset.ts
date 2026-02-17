@@ -50,6 +50,7 @@ const config: Omit<Config, 'content'> = {
         'body': {
           '@apply bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 transition-colors duration-300 ease-in-out': {},
           'font-family': 'var(--font-plus-jakarta-sans), system-ui, sans-serif',
+          'font-feature-settings': '"cv02", "cv03", "cv04", "cv11"',
         },
       })
       addComponents({
