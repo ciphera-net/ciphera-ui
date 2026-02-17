@@ -71,9 +71,9 @@ const config: Omit<Config, 'content'> = {
         '.badge-primary': {
           '@apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand-orange/10 text-brand-orange border border-brand-orange/20': {},
         },
-        /* * Tier 2 - Shared marketing layout components */
+        /* * Tier 2 - Shared marketing layout components (aligned with Pulse design system) */
         '.section-container': {
-          '@apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8': {},
+          '@apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8': {},
         },
         '.section-padding': {
           '@apply py-12 sm:py-16 md:py-24 lg:py-32': {},
