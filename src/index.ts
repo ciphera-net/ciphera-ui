@@ -11,6 +11,7 @@ export { Input, type InputProps } from './components/Input'
 export { PasswordInput, type PasswordInputProps } from './components/PasswordInput'
 export { Modal, type ModalProps } from './components/Modal'
 export { LoadingOverlay, type LoadingOverlayProps } from './components/LoadingOverlay'
+export { Spinner, type SpinnerProps } from './components/Spinner'
 export { Checkbox, type CheckboxProps } from './components/Checkbox'
 export { default as Select, type SelectProps, type SelectOption } from './components/Select'
 export { default as DatePicker, type DatePickerProps, type DateRange } from './components/DatePicker'
@@ -18,8 +19,24 @@ export { default as StatsCard, type StatsCardProps } from './components/StatsCar
 export { default as ProfileSettings, type ProfileSettingsProps } from './components/settings/ProfileSettings'
 export { default as FeedbackModal, type FeedbackModalProps } from './components/FeedbackModal'
 export { default as Captcha, type CaptchaProps } from './components/Captcha'
+export { CodeBlock, type CodeBlockProps } from './components/CodeBlock'
 export { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 export { solvePoW } from './utils/pow'
+export {
+  getAuthErrorMessage,
+  authMessageFromStatus,
+  authMessageFromErrorType,
+  AUTH_ERROR_MESSAGES,
+  type AuthErrorType,
+} from './utils/authErrors'
+export {
+  formatNumber,
+  formatDate,
+  getDateRange,
+  formatUpdatedAgo,
+  formatRelativeTime,
+  formatDuration,
+} from './utils/format'
 export * from './icons/generated'
 export { Toaster } from './components/Toaster'
 export { toast, Toast, type ToastProps } from './components/Toast'

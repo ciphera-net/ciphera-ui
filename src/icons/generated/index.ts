@@ -31,6 +31,7 @@ export { default as RefreshCwIcon } from "./RefreshCwIcon";
 export { default as SettingsIcon } from "./SettingsIcon";
 export { default as Share2Icon } from "./Share2Icon";
 export { default as SunIcon } from "./SunIcon";
+export { default as SwissFlagIcon } from "./SwissFlagIcon";
 export { default as TwitterIcon } from "./TwitterIcon";
 export { default as TrashIcon } from "./TrashIcon";
 export { default as EditIcon } from "./EditIcon";
