@@ -71,6 +71,29 @@ const config: Omit<Config, 'content'> = {
         '.badge-primary': {
           '@apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand-orange/10 text-brand-orange border border-brand-orange/20': {},
         },
+        /* * Tier 2 - Shared marketing layout components */
+        '.section-container': {
+          '@apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8': {},
+        },
+        '.section-padding': {
+          '@apply py-12 sm:py-16 md:py-24 lg:py-32': {},
+        },
+        '.card': {
+          '@apply bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl transition-all duration-300 ease-out': {},
+        },
+        '.card-hover': {
+          '@apply hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-xl hover:shadow-neutral-200/50 dark:hover:shadow-black/50 hover:-translate-y-1': {},
+        },
+        '.btn-ghost': {
+          '@apply inline-flex items-center justify-center gap-2 bg-transparent text-neutral-600 dark:text-neutral-400 font-medium px-4 py-2 rounded-lg transition-all duration-200 ease-out hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 dark:focus:ring-offset-neutral-950': {},
+        },
+        /* * Tier 3 - Design system page containers */
+        '.page-container-app': {
+          '@apply w-full max-w-6xl mx-auto px-4 sm:px-6 py-8': {},
+        },
+        '.page-container-marketing': {
+          '@apply w-full max-w-4xl mx-auto px-4 pt-20 pb-10': {},
+        },
       })
       addUtilities({
         /* * Dot grid background for marketing pages */
