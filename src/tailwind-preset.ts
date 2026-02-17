@@ -19,8 +19,12 @@ const config: Omit<Config, 'content'> = {
     },
   },
   plugins: [
-    plugin(function({ addBase, addComponents }) {
+    plugin(function({ addBase, addComponents, addUtilities }) {
       addBase({
+        /* * Selection styling - consistent across all Ciphera products */
+        '::selection': {
+          '@apply bg-brand-orange/20 text-neutral-900 dark:text-white': {},
+        },
         ':root': {
           '--color-brand-orange': '#FD5E0F',
           '--color-neutral-50': '#fafafa',
@@ -54,7 +58,30 @@ const config: Omit<Config, 'content'> = {
         },
         '.btn-secondary': {
           '@apply bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white px-5 py-2.5 rounded-xl font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all duration-200 shadow-sm hover:shadow-md dark:shadow-none focus:outline-none focus:ring-2 focus:ring-neutral-200 dark:focus:ring-neutral-700 focus:ring-offset-2 dark:focus:ring-offset-neutral-900': {},
-        }
+        },
+        /* * Glass card effect - shared across Pulse, Website, marketing pages */
+        '.card-glass': {
+          '@apply bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-800/50 rounded-2xl transition-all duration-300 ease-out': {},
+        },
+        /* * Gradient text for headlines */
+        '.gradient-text': {
+          '@apply bg-gradient-to-r from-brand-orange to-brand-orange-hover bg-clip-text text-transparent': {},
+        },
+        /* * Primary badge style */
+        '.badge-primary': {
+          '@apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand-orange/10 text-brand-orange border border-brand-orange/20': {},
+        },
+      })
+      addUtilities({
+        /* * Dot grid background for marketing pages */
+        '.bg-grid-pattern': {
+          backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)',
+          backgroundSize: '32px 32px',
+        },
+        /* * Orange glow effect */
+        '.glow-orange': {
+          boxShadow: '0 0 40px -10px rgba(253, 94, 15, 0.5)',
+        },
       })
     })
   ]
