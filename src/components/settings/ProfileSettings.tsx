@@ -509,7 +509,7 @@ export default function ProfileSettings({
   if (!user) return null
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">Settings</h1>
         <p className="mt-2 text-neutral-600 dark:text-neutral-400">
